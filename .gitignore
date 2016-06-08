@@ -103,4 +103,4 @@ project/plugins/project/
 
 
 #
-.idea/*
+./*/.idea/
