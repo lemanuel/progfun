@@ -20,7 +20,21 @@ object Main {
   /**
    * Exercise 2
    */
-    def balance(chars: List[Char]): Boolean = ???
+  def balance(chars: List[Char]): Boolean = {
+    def iter(chars: List[Char], openParen: Int): Boolean =
+      if (chars.isEmpty)
+        true
+      else if (chars.head == '(')
+        iter(chars.tail, openParen + 1)
+      else if (chars.head == ')') {
+        if (openParen == 0)
+          false
+        else iter(chars.tail, openParen - 1)
+      } else
+        iter(chars.tail, openParen)
+
+    iter(chars, 0)
+  }
   
   /**
    * Exercise 3
