@@ -24,9 +24,12 @@ object Main {
   def balance(chars: List[Char]): Boolean = {
     def iter(chars: List[Char], openParen: Int): Boolean = chars match {
       case Nil => true
+      case '(' :: Nil => false
       case '(' :: rest => iter(rest, openParen + 1)
-      case ')' :: rest if openParen == 0 => false
-      case ')' :: rest => iter(rest, openParen - 1)
+      case ')' :: rest => {
+        if (openParen == 0) false
+        else iter(rest, openParen - 1)
+      }
       case _ :: rest => iter(rest, openParen)
     }
 
