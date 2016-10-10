@@ -153,10 +153,11 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
 
   def union(that: TweetSet): TweetSet =
     // TODO: (contains?+incl) vs (incl) benchmark -- travers 2 times vs object time creation
-    if (that contains elem)
-      left union (right union that)
-    else
-      left union (right union (that incl elem))
+    // if (that contains elem)
+    //   left union (right union that)
+    // else
+    //   left union (right union (that incl elem))
+    left union(right union (that incl elem))
 
   def isEmpty: Boolean = false
 
@@ -165,7 +166,7 @@ class NonEmpty(elem: Tweet, left: TweetSet, right: TweetSet) extends TweetSet {
       if (tweet1.retweets > tweet2.retweets) tweet1
       else tweet2
 
-    if (left.isEmpty || right.isEmpty) elem
+    if (left.isEmpty && right.isEmpty) elem
     else if (right.isEmpty) maxRetweets(left.mostRetweeted, elem)
     else if (left.isEmpty) maxRetweets(right.mostRetweeted, elem)
     else maxRetweets(left.mostRetweeted, maxRetweets(right.mostRetweeted, elem))
